@@ -30,18 +30,40 @@ library lambda-var-sig
 
 library lambda-abs-sig
   signatures:          Lambda.Abs
+  exposed-modules:     Lambda.Abs.Semantics
   build-depends:       base >=4.9 && <4.11
                      , lambda-term-sig
                      , lambda-var-sig
                      , lens
+                     , semantics
   hs-source-dirs:      lambda-abs-sig
+
+library lambda-subst
+  exposed-modules:     Lambda.Subst
+  build-depends:       base >=4.9 && <4.11
+                     , lambda-term-sig
+                     , lambda-abs-sig
+                     , lambda-var-sig
+                     , lens
+  hs-source-dirs:      lambda-subst
 
 library lambda-app-sig
   signatures:          Lambda.App
+  exposed-modules:     Lambda.App.Semantics
   build-depends:       base >=4.9 && <4.11
                      , lambda-term-sig
+                     , lambda-abs-sig
+                     , lambda-subst
                      , lens
+                     , semantics
   hs-source-dirs:      lambda-app-sig
+
+library semantics
+  signatures:          Control.MaybeK
+                     , Semantics.BigStep
+                     , Semantics.Step
+  build-depends:       base >=4.9 && <4.11
+  hs-source-dirs:      semantics
 
 library
   exposed-modules:     Lambda

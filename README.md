@@ -8,5 +8,5 @@ three constructors:
 * `Abs` (lambda-abs-sig/Lambda/Abs.hsig)
 * `App` (lambda-app-sig/Lambda/App.hsig)
 
-We can implement capture-avoiding substitution and beta-reduction
-(src/Lambda.hs)
+We can implement capture-avoiding substitution (lambda-subst/Lambda/Subst.hs)
+and beta-reduction (lambda-app-sig/Lambda/App/Semantics.hs)
