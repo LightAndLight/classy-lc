@@ -1,0 +1,8 @@
+signature Lambda.Abs where
+
+import Lambda.Term
+import Lambda.Var
+
+import Control.Lens.Prism
+
+_Abs :: Prism' Term (Var, Term)

@@ -1,0 +1,7 @@
+signature Lambda.App where
+
+import Lambda.Term
+
+import Control.Lens.Prism
+
+_App :: Prism' Term (Term, Term)
