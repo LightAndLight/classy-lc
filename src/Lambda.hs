@@ -25,7 +25,8 @@ subst subs = go []
           filter (`notElem` scope) $
           iterate succ v
 
-beta :: Term -> Term -> Maybe Term
-beta f x = do
+beta :: Term -> Maybe Term
+beta tm = do
+  (f, x) <- f ^? _App
   (name, body) <- f ^? _Abs
   pure $ subst [(name, x)] body
