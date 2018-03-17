@@ -49,7 +49,8 @@ library lambda-subst
 
 library lambda-app-sig
   signatures:          Lambda.App
-  exposed-modules:     Lambda.App.Semantics
+  exposed-modules:     Lambda.App.Semantics.Strict
+                     , Lambda.App.Semantics.Lazy
   build-depends:       base >=4.9 && <4.11
                      , lambda-term-sig
                      , lambda-abs-sig
@@ -59,10 +60,12 @@ library lambda-app-sig
   hs-source-dirs:      lambda-app-sig
 
 library semantics
-  signatures:          Control.MaybeK
+  signatures:          Semantics.BigStep.Sig
+  exposed-modules:     Control.MaybeK
                      , Semantics.BigStep
                      , Semantics.Step
   build-depends:       base >=4.9 && <4.11
+                     , lambda-term-sig
   hs-source-dirs:      semantics
 
 library

@@ -12,13 +12,13 @@ import Semantics.Step
 newtype BigStep from to = BigStep { unBigStep :: Step from to }
   deriving (Category, Functor, Applicative, Alternative, Monad)
 
-bigStep :: (from -> MaybeK to) -> BigStep from to
-bigStep = BigStep . step
+mkBigStep :: (from -> MaybeK to) -> BigStep from to
+mkBigStep = BigStep . step
 
-bigSteps :: [BigStep from to -> BigStep from to] -> BigStep from to
+bigSteps :: [(from -> MaybeK to) -> BigStep from to] -> BigStep from to
 bigSteps steps = here
   where
-    here = asum $ fmap ($ here) steps
+    here = asum $ fmap ($ runBigStep here) steps
 
 runBigStep :: BigStep from to -> from -> MaybeK to
 runBigStep = runStep . unBigStep
