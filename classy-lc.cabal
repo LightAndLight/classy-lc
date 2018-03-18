@@ -92,8 +92,8 @@ library example-strict-lc-impl
 
 library
   reexported-modules:  Lambda.Eval
+  exposed-modules:     Lib
   build-depends:       base >=4.9 && <4.11
-                     , lens
                      , example-strict-lc-eval
                      , example-strict-lc-impl
   hs-source-dirs:      src
