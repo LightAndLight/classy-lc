@@ -22,4 +22,4 @@ subst subs = go []
           review _Var .
           head .
           filter (`notElem` scope) $
-          iterate succ v
+          iterate nextVar v

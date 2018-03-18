@@ -68,15 +68,34 @@ library semantics
                      , lambda-term-sig
   hs-source-dirs:      semantics
 
-library
+library example-strict-lc-eval
   exposed-modules:     Lambda
-  -- other-modules:       
-  -- other-extensions:    
   build-depends:       base >=4.9 && <4.11
                      , lens
                      , lambda-term-sig
-                     , lambda-var-sig
-                     , lambda-abs-sig
                      , lambda-app-sig
+                     , lambda-abs-sig
+                     , lambda-var-sig
+                     , semantics
+  hs-source-dirs:      example-strict-lc
+  default-language:    Haskell2010
+
+library example-strict-lc-impl
+  exposed-modules:     Lambda.Term
+                     , Lambda.Var
+                     , Lambda.Abs
+                     , Lambda.App
+  other-modules:       Lambda.Internal
+  build-depends:       base >=4.9 && <4.11
+                     , lens
+  hs-source-dirs:      example-strict-lc
+  default-language:    Haskell2010
+
+library
+  reexported-modules:  Lambda
+  build-depends:       base >=4.9 && <4.11
+                     , lens
+                     , example-strict-lc-eval
+                     , example-strict-lc-impl
   hs-source-dirs:      src
   default-language:    Haskell2010

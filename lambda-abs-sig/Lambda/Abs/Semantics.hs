@@ -5,5 +5,5 @@ import Lambda.Term
 import Lambda.Abs
 import Semantics.BigStep
 
-bigStepAbs :: (Term -> MaybeK Term) -> BigStep Term Term
-bigStepAbs _ = mkBigStep (const nothing)
+absBigStep :: (Term -> MaybeK Term) -> BigStep Term Term
+absBigStep _ = mkBigStep (const nothing)
