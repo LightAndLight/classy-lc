@@ -5,5 +5,5 @@ import Lambda.Term
 import Lambda.Abs
 import Semantics.BigStep
 
-absBigStep :: (Term -> MaybeK Term) -> BigStep Term Term
+absBigStep :: (TermF f -> MaybeK (TermF f)) -> BigStep (TermF f) (TermF f)
 absBigStep _ = mkBigStep (const nothing)

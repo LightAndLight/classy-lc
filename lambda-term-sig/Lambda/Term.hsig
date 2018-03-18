@@ -1,6 +1,10 @@
+{-# language KindSignatures #-}
 signature Lambda.Term where
 
 import Control.Lens.Plated
+import Data.Functor.Identity
 
-data Term
-instance Plated Term
+data TermF (f :: * -> *)
+instance Traversable f => Plated (TermF f)
+
+type Term = TermF Identity

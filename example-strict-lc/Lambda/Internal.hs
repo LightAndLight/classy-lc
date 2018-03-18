@@ -1,4 +1,5 @@
 {-# language DeriveGeneric #-}
+{-# language StandaloneDeriving, UndecidableInstances #-}
 module Lambda.Internal where
 
 import Control.Lens
@@ -11,8 +12,11 @@ data Var = MkVar String !Int
 instance IsString Var where
   fromString s = MkVar s 0
 
-data Term = Var Var | Abs Var Term | App Term Term
-  deriving (Eq, Ord, Show, Generic)
+data TermF f = Var Var | Abs Var (f (TermF f)) | App (f (TermF f)) (f (TermF f))
+  deriving Generic
+deriving instance Eq (f (TermF f)) => Eq (TermF f)
+deriving instance Ord (f (TermF f)) => Ord (TermF f)
+deriving instance Show (f (TermF f)) => Show (TermF f)
 
-instance Plated Term where
+instance Traversable f => Plated (TermF f) where
   plate = gplate

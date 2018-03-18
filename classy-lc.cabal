@@ -29,8 +29,9 @@ library lambda-var-sig
   hs-source-dirs:      lambda-var-sig
 
 library lambda-abs-sig
-  signatures:          Lambda.Abs
-  exposed-modules:     Lambda.Abs.Semantics
+  signatures:          Lambda.Abs.Indef
+  exposed-modules:     Lambda.Abs
+                     , Lambda.Abs.Semantics
   build-depends:       base >=4.9 && <4.11
                      , lambda-term-sig
                      , lambda-var-sig
@@ -48,8 +49,9 @@ library lambda-subst
   hs-source-dirs:      lambda-subst
 
 library lambda-app-sig
-  signatures:          Lambda.App
-  exposed-modules:     Lambda.App.Semantics.Strict
+  signatures:          Lambda.App.Indef
+  exposed-modules:     Lambda.App
+                     , Lambda.App.Semantics.Strict
                      , Lambda.App.Semantics.Lazy
   build-depends:       base >=4.9 && <4.11
                      , lambda-term-sig
@@ -82,8 +84,8 @@ library example-strict-lc-eval
 library example-strict-lc-impl
   exposed-modules:     Lambda.Term
                      , Lambda.Var
-                     , Lambda.Abs
-                     , Lambda.App
+                     , Lambda.Abs.Indef
+                     , Lambda.App.Indef
                      , Lambda.Internal
   build-depends:       base >=4.9 && <4.11
                      , lens
@@ -96,5 +98,8 @@ library
   build-depends:       base >=4.9 && <4.11
                      , example-strict-lc-eval
                      , example-strict-lc-impl
+                     , lambda-abs-sig
+                     , lambda-app-sig
+                     , lens
   hs-source-dirs:      src
   default-language:    Haskell2010

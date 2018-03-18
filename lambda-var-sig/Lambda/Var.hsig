@@ -10,4 +10,4 @@ instance Ord Var
 
 nextVar :: Var -> Var
 
-_Var :: Prism' Term Var
+_Var :: Prism' (TermF f) Var
