@@ -1,8 +1,0 @@
-signature Semantics.BigStep.Sig where
-
-import Control.MaybeK
-import Semantics.BigStep
-
-import Lambda.Term
-
-bigStep :: (Term -> MaybeK Term) -> BigStep Term Term

@@ -1,4 +1,4 @@
-module Lambda where
+module Lambda.Eval where
 
 import Control.MaybeK
 import Lambda.Term
