@@ -1,6 +1,6 @@
-signature Lambda.Var where
+signature Lambda.Var.Indef where
 
-import Lambda.Term
+import Lambda.Term.Indef
 
 import Control.Lens.Prism
 

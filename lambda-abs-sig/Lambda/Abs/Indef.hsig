@@ -1,7 +1,7 @@
 signature Lambda.Abs.Indef where
 
-import Lambda.Term
-import Lambda.Var
+import Lambda.Term.Indef
+import Lambda.Var.Indef
 
 import Control.Lens.Prism
 

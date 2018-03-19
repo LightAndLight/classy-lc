@@ -1,6 +1,6 @@
 signature Lambda.App.Indef where
 
-import Lambda.Term
+import Lambda.Term.Indef
 
 import Control.Lens.Prism
 

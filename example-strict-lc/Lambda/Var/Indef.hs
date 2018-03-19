@@ -1,5 +1,5 @@
 {-# language LambdaCase #-}
-module Lambda.Var (Var(..), nextVar, _Var) where
+module Lambda.Var.Indef (Var(..), nextVar, _Var) where
 
 import Control.Lens
 

@@ -1,7 +1,7 @@
 module Lambda.Subst where
 
 import Lambda.Term
-import Lambda.Var
+import Lambda.Var.Indef
 import Lambda.Abs
 
 import Control.Lens

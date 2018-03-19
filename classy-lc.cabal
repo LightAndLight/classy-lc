@@ -16,13 +16,14 @@ extra-source-files:  ChangeLog.md
 cabal-version:       >=1.10
 
 library lambda-term-sig
-  signatures:          Lambda.Term
+  signatures:          Lambda.Term.Indef
+  exposed-modules:     Lambda.Term
   build-depends:       base >=4.9 && <4.11
                      , lens
   hs-source-dirs:      lambda-term-sig
 
 library lambda-var-sig
-  signatures:          Lambda.Var
+  signatures:          Lambda.Var.Indef
   build-depends:       base >=4.9 && <4.11
                      , lambda-term-sig
                      , lens
@@ -82,8 +83,8 @@ library example-strict-lc-eval
   default-language:    Haskell2010
 
 library example-strict-lc-impl
-  exposed-modules:     Lambda.Term
-                     , Lambda.Var
+  exposed-modules:     Lambda.Term.Indef
+                     , Lambda.Var.Indef
                      , Lambda.Abs.Indef
                      , Lambda.App.Indef
                      , Lambda.Internal

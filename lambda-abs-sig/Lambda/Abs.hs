@@ -2,7 +2,7 @@ module Lambda.Abs (_AbsF, _Abs) where
 
 import Lambda.Abs.Indef
 import Lambda.Term
-import Lambda.Var
+import Lambda.Var.Indef
 
 import Control.Lens
 

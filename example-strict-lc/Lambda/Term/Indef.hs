@@ -1,5 +1,5 @@
 {-# language DeriveGeneric #-}
-module Lambda.Term (TermF(..), Term) where
+module Lambda.Term.Indef (TermF(..), Term) where
 
 import Data.Functor.Identity
 import Lambda.Internal
