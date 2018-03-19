@@ -19,4 +19,6 @@ deriving instance Ord (f (TermF f)) => Ord (TermF f)
 deriving instance Show (f (TermF f)) => Show (TermF f)
 
 instance Traversable f => Plated (TermF f) where
-  plate = gplate
+  plate f (Abs v e) = Abs v <$> traverse f e
+  plate f (App a b) = App <$> traverse f a <*> traverse f b
+  plate f a = pure a
