@@ -90,6 +90,7 @@ library example-strict-lc-impl
                      , Lambda.Internal
   build-depends:       base >=4.9 && <4.11
                      , lens
+                     , unification
   hs-source-dirs:      example-strict-lc
   default-language:    Haskell2010
 
@@ -97,6 +98,7 @@ library unification
   exposed-modules:     Data.HFunctor
                      , Data.HFoldable
                      , Data.HTraversable
+                     , Data.Fixversable
                      , Data.Unify
   build-depends:       base >=4.9 && <4.11
                      , lens
@@ -113,6 +115,8 @@ library
                      , example-strict-lc-impl
                      , lambda-abs-sig
                      , lambda-app-sig
+                     , lambda-term-sig
+                     , unification
                      , lens
   hs-source-dirs:      src
   default-language:    Haskell2010

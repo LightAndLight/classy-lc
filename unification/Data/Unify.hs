@@ -23,6 +23,7 @@ module Data.Unify
 where
 
 import Control.Lens
+import Control.HMonad
 import Control.Monad
 import Control.Monad.Except
 import Control.Monad.State
@@ -31,6 +32,7 @@ import Data.Either
 import Data.Equivalence.Monad
 import Data.Foldable (traverse_)
 import Data.Functor.Classes
+import Data.Fixversable
 import Data.HFoldable
 import Data.HFunctor
 import Data.Functor.Identity
@@ -48,23 +50,29 @@ deriving instance Show (f (Either UVar)) => Show (UTerm f)
 data UnificationError f
   = CannotUnify (f (Either UVar)) (f (Either UVar))
   | OccursError UVar (f (Either UVar))
+deriving instance Eq (f (Either UVar)) => Eq (UnificationError f)
+deriving instance Ord (f (Either UVar)) => Ord (UnificationError f)
+deriving instance Show (f (Either UVar)) => Show (UnificationError f)
 makeClassyPrisms ''UnificationError
 
 newtype FreshCount = FreshCount { unFreshCount :: Int }
   deriving (Eq, Show, Ord)
 
-fresh :: MonadState FreshCount m => m UVar
-fresh = do
+fresh :: UnifyT s e f UVar
+fresh = UnifyT . lift $ do
   n <- unFreshCount <$> get
   modify $! (FreshCount . (+1) . unFreshCount)
   pure $ UVar n
 
 -- instance (forall g. Traversable g => Plated (f g)) => Plated (UTerm f) where
-instance Plated (f (Either UVar)) => Plated (UTerm f) where
-  plate f =
-    fmap UTerm .
-    traverse (traverseOf plate (fmap ((^?! _Right) . unUTerm) . f . UTerm . Right)) .
-    unUTerm
+instance Fixversable f => Plated (UTerm f) where
+  plate f (UTerm t) =
+    case t of
+      Left{} -> pure $ UTerm t
+      Right t' -> UTerm <$> go (fmap unUTerm . f . UTerm ) (Right t')
+    where
+      go f (Left v) = f (Left v)
+      go f (Right v) = Right <$> fixverse f v
 
 unfreeze :: HFunctor f => f Identity -> UTerm f
 unfreeze = UTerm . Right . hfmap (Right . runIdentity)
@@ -75,7 +83,7 @@ freeze = (htraverse go . runIdentity) <=< (go . unUTerm)
     go = either (const Nothing) (Just . Identity)
 
 -- (forall g. Traversable g => Plated (f g)), ... => 
-find :: (Plated (f (Either UVar)), Ord (f (Either UVar))) => UTerm f -> UnifyT s e f (UTerm f)
+find :: (Fixversable f, Ord (f (Either UVar))) => UTerm f -> UnifyT s e f (UTerm f)
 find = traverseOf plate find <=< (UnifyT . classDesc)
 
 occurs :: HFoldable f => UVar -> UTerm f -> Bool
@@ -90,7 +98,7 @@ class Unifiable f where
 
 -- forall g. Traversable g => Plated (f g))
 unify
-  :: ( Plated (f (Either UVar))
+  :: ( Fixversable f
      , Ord (f (Either UVar))
      , HFoldable f
      , Unifiable f

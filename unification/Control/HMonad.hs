@@ -1,3 +1,4 @@
+{-# language RankNTypes #-}
 module Control.HMonad where
 
 import Data.HFunctor

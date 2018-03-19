@@ -5,4 +5,4 @@ import Data.HFoldable
 import Data.HFunctor
 
 class (HFunctor h, HFoldable h) => HTraversable h where
-  htraverse :: Applicative m => (forall x. f x -> m (g x)) -> h f -> m (h g)
+  htraverse :: (Traversable f, Traversable g, Monad m) => (forall x. f x -> m (g x)) -> h f -> m (h g)
