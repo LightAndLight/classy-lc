@@ -4,6 +4,7 @@
 {-# language RankNTypes #-}
 {-# language GeneralizedNewtypeDeriving #-}
 {-# language TemplateHaskell, MultiParamTypeClasses, FlexibleInstances, FunctionalDependencies #-}
+{-# language TypeFamilies #-}
 module Data.Unify
   ( UVar
   , FreshCount
@@ -24,7 +25,6 @@ where
 
 import Control.Lens
 import Control.Lens.HPlated
-import Control.HMonad
 import Control.Monad
 import Control.Monad.Except
 import Control.Monad.State
@@ -46,6 +46,7 @@ newtype UTerm f = UTerm { unUTerm :: Either UVar (f (Either UVar)) }
 deriving instance Eq (f (Either UVar)) => Eq (UTerm f)
 deriving instance Ord (f (Either UVar)) => Ord (UTerm f)
 deriving instance Show (f (Either UVar)) => Show (UTerm f)
+makeWrapped ''UTerm
 
 data UnificationError f
   = CannotUnify (f (Either UVar)) (f (Either UVar))
