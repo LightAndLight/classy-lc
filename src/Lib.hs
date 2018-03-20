@@ -7,11 +7,11 @@ import Lambda.Abs
 import Lambda.Term
 import Data.Unify
 
-term = _Abs # ("x", _Var # "x")
+term = _Abs # ("x", _Abs # ("y", _Var # "x"))
 
 test :: Either (UnificationError TermF) (Maybe Term)
 test = runUnifyT $ do
   var <- fresh
-  let term' = UTerm . Right $ _AbsF # ("x", Left var)
+  let term' = UTerm . Right $ _AbsF # ("x", Right $ _AbsF # ("y", Left var))
   unify (unfreeze term) term'
   freeze <$> find term'

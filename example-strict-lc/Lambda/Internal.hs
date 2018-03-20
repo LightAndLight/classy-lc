@@ -3,10 +3,10 @@
 module Lambda.Internal where
 
 import Control.Lens
+import Control.Lens.HPlated
 import Data.HFunctor
 import Data.HFoldable
 import Data.HTraversable
-import Data.Fixversable
 import Data.Monoid
 import Data.String
 import Data.Unify
@@ -55,7 +55,7 @@ instance HTraversable TermF where
   htraverse f (Abs a b) = Abs a <$> (f b >>= traverse (htraverse f))
   htraverse _ (Var v) = pure $ Var v
 
-instance Fixversable TermF where
-  fixverse f (App a b) = App <$> f a <*> f b
-  fixverse f (Abs a b) = Abs a <$> f b
-  fixverse f (Var v) = pure $ Var v
+instance HPlated TermF where
+  hplate f (App a b) = App <$> f a <*> f b
+  hplate f (Abs a b) = Abs a <$> f b
+  hplate f (Var v) = pure $ Var v

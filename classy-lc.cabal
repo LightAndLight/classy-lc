@@ -95,10 +95,10 @@ library example-strict-lc-impl
   default-language:    Haskell2010
 
 library unification
-  exposed-modules:     Data.HFunctor
+  exposed-modules:     Control.Lens.HPlated
+                     , Data.HFunctor
                      , Data.HFoldable
                      , Data.HTraversable
-                     , Data.Fixversable
                      , Data.Unify
   build-depends:       base >=4.9 && <4.11
                      , lens
