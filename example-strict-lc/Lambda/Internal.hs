@@ -44,11 +44,14 @@ instance HFunctor TermF where
   hfmap f (Abs a b) = Abs a (hfmap f <$> f b)
   hfmap f (Var v) = Var v
 
+-- instance HFoldable TermF where
+  -- hfoldMap f (App a b) =
+    -- f a <> foldMap (hfoldMap f) a <> f b <> foldMap (hfoldMap f) b
+  -- hfoldMap f (Abs _ b) = f b <> foldMap (hfoldMap f) b
+  -- hfoldMap _ (Var _) = mempty
+
 instance HFoldable TermF where
-  hfoldMap f (App a b) =
-    f a <> foldMap (hfoldMap f) a <> f b <> foldMap (hfoldMap f) b
-  hfoldMap f (Abs _ b) = f b <> foldMap (hfoldMap f) b
-  hfoldMap _ (Var _) = mempty
+  hfoldMap = ghfoldMap
 
 instance HTraversable TermF where
   htraverse f (App a b) = App <$> (f a >>= traverse (htraverse f)) <*> (f b >>= traverse (htraverse f))
