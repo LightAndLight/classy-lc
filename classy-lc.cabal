@@ -119,6 +119,31 @@ library semantics
   hs-source-dirs:      semantics
   default-language:    Haskell2010
 
+library lambda-type-sig
+  signatures:          Lambda.Type.Indef
+  exposed-modules:     Lambda.Type
+  build-depends:       base >=4.9 && <4.11
+                     , lens
+  hs-source-dirs:      lambda-type-sig
+  default-language:    Haskell2010
+
+library lambda-type-context-sig
+  signatures:          Lambda.Type.Context.Indef
+  build-depends:       base >=4.9 && <4.11
+                     , lens
+  hs-source-dirs:      lambda-type-sig
+                     , lambda-var-sig
+  default-language:    Haskell2010
+
+library typing
+  exposed-modules:     Typing
+  build-depends:       base >=4.9 && <4.11
+                     , lambda-type-sig
+                     , lambda-term-sig
+                     , lambda-type-context-sig
+  hs-source-dirs:      typing
+  default-language:    Haskell2010
+
 library example-strict-lc-eval
   exposed-modules:     Lambda.Eval
   build-depends:       base >=4.9 && <4.11

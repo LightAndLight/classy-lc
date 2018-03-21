@@ -1,0 +1,9 @@
+{-# language KindSignatures #-}
+signature Lambda.Type.Context.Indef where
+
+import Lambda.Var.Indef
+import Lambda.Type
+
+data Context (f :: * -> *)
+
+insert :: Var -> TypeF f -> Context f
