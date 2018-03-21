@@ -1,0 +1,7 @@
+signature Lambda.App.Indef where
+
+import Lambda.Term.Indef
+
+import Control.Lens.Prism
+
+_AppF :: Prism' (TermF f) (f (TermF f), f (TermF f))

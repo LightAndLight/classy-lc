@@ -1,6 +1,6 @@
-signature Lambda.Var where
+signature Lambda.Var.Indef where
 
-import Lambda.Term
+import Lambda.Term.Indef
 
 import Control.Lens.Prism
 
@@ -10,4 +10,4 @@ instance Ord Var
 
 nextVar :: Var -> Var
 
-_Var :: Prism' Term Var
+_Var :: Prism' (TermF f) Var

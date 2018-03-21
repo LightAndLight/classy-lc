@@ -1,6 +1,0 @@
-signature Lambda.Term where
-
-import Control.Lens.Plated
-
-data Term
-instance Plated Term

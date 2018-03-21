@@ -4,7 +4,7 @@ import Control.Applicative
 import Control.MaybeK
 import Lambda.Term
 import Lambda.Abs.Semantics
-import Lambda.App.Semantics.Strict
+import Lambda.App.Debruijn.Semantics.Strict
 import Semantics.BigStep
 
 eval :: Term -> Term

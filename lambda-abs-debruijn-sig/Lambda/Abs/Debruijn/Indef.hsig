@@ -1,0 +1,15 @@
+signature Lambda.Abs.Debruijn.Indef where
+
+import Lambda.Term.Indef
+
+import Control.Lens.Prism
+
+_AbsF :: Prism' (TermF f) (f (TermF f))
+
+data Bound
+instance Eq Bound
+instance Ord Bound
+instance Enum Bound
+
+bzero :: Bound
+_Bound :: Prism' (TermF f) Bound

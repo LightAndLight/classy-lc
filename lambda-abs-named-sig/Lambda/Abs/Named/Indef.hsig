@@ -1,0 +1,8 @@
+signature Lambda.Abs.Named.Indef where
+
+import Lambda.Term.Indef
+import Lambda.Var.Indef
+
+import Control.Lens.Prism
+
+_AbsF :: Prism' (TermF f) (Var, f (TermF f))
