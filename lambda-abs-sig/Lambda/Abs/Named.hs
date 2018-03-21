@@ -1,6 +1,6 @@
-module Lambda.Abs (_AbsF, _Abs) where
+module Lambda.Abs.Named (_AbsF, _Abs) where
 
-import Lambda.Abs.Indef
+import Lambda.Abs.Named.Indef
 import Lambda.Term
 import Lambda.Var.Indef
 

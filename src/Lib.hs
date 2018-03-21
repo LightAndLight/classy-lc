@@ -3,7 +3,7 @@ module Lib where
 
 import Control.Lens
 import Lambda.Var.Indef
-import Lambda.Abs
+import Lambda.Abs.Named
 import Lambda.Term
 import Data.Unify
 

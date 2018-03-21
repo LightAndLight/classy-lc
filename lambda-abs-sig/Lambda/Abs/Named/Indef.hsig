@@ -1,4 +1,4 @@
-signature Lambda.Abs.Indef where
+signature Lambda.Abs.Named.Indef where
 
 import Lambda.Term.Indef
 import Lambda.Var.Indef

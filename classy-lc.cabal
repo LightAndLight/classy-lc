@@ -30,9 +30,9 @@ library lambda-var-sig
   hs-source-dirs:      lambda-var-sig
 
 library lambda-abs-sig
-  signatures:          Lambda.Abs.Indef
-  exposed-modules:     Lambda.Abs
-                     , Lambda.Abs.Semantics
+  signatures:          Lambda.Abs.Named.Indef
+  exposed-modules:     Lambda.Abs.Named
+                     , Lambda.Abs.Named.Semantics
   build-depends:       base >=4.9 && <4.11
                      , lambda-term-sig
                      , lambda-var-sig
@@ -52,8 +52,8 @@ library lambda-subst
 library lambda-app-sig
   signatures:          Lambda.App.Indef
   exposed-modules:     Lambda.App
-                     , Lambda.App.Semantics.Strict
-                     , Lambda.App.Semantics.Lazy
+                     , Lambda.App.Named.Semantics.Strict
+                     , Lambda.App.Named.Semantics.Lazy
   build-depends:       base >=4.9 && <4.11
                      , lambda-term-sig
                      , lambda-abs-sig

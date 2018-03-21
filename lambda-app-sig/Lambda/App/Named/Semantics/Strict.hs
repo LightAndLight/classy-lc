@@ -1,11 +1,11 @@
-module Lambda.App.Semantics.Strict where
+module Lambda.App.Named.Semantics.Strict where
 
 import Control.Applicative
 import Control.Lens
 import Control.MaybeK
 import Lambda.Term
 import Lambda.App
-import Lambda.Abs
+import Lambda.Abs.Named
 import Lambda.Subst
 import Semantics.BigStep
 
