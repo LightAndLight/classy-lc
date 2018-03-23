@@ -23,11 +23,35 @@ library lambda-term-sig
   hs-source-dirs:      lambda-term-sig
   default-language:    Haskell2010
 
+library lambda-type-context-cvar
+  exposed-modules:     Lambda.Type.CVar
+  build-depends:       base >=4.9 && <4.11
+                     , lens
+                     , mtl
+  hs-source-dirs:      lambda-type-context-cvar
+  default-language:    Haskell2010
+
+library lambda-type-context-sig
+  signatures:          Lambda.Type.Context.Indef
+  build-depends:       base >=4.9 && <4.11
+                     , lens
+                     , lambda-type-sig
+                     , mtl
+                     , lambda-type-context-cvar
+  hs-source-dirs:      lambda-type-context-sig
+  default-language:    Haskell2010
+
 library lambda-var-sig
   signatures:          Lambda.Var.Indef
+  exposed-modules:     Lambda.Var.Inference
   build-depends:       base >=4.9 && <4.11
                      , lambda-term-sig
+                     , lambda-type-sig
+                     , lambda-type-context-sig
+                     , lambda-type-context-cvar
+                     , mtl
                      , lens
+                     , typing
   hs-source-dirs:      lambda-var-sig
   default-language:    Haskell2010
 
@@ -127,20 +151,9 @@ library lambda-type-sig
   hs-source-dirs:      lambda-type-sig
   default-language:    Haskell2010
 
-library lambda-type-context-sig
-  signatures:          Lambda.Type.Context.Indef
-  build-depends:       base >=4.9 && <4.11
-                     , lens
-  hs-source-dirs:      lambda-type-sig
-                     , lambda-var-sig
-  default-language:    Haskell2010
-
 library typing
   exposed-modules:     Typing
   build-depends:       base >=4.9 && <4.11
-                     , lambda-type-sig
-                     , lambda-term-sig
-                     , lambda-type-context-sig
   hs-source-dirs:      typing
   default-language:    Haskell2010
 
@@ -158,15 +171,33 @@ library example-strict-lc-eval
   hs-source-dirs:      example-strict-lc/eval
   default-language:    Haskell2010
 
+library example-strict-lc-infer
+  exposed-modules:     Lambda.Infer
+  build-depends:       base >=4.9 && <4.11
+                     , lens
+                     , lambda-term-sig
+                     , lambda-type-sig
+                     , lambda-type-context-sig
+                     , lambda-var-sig
+                     , mtl
+                     , typing
+  hs-source-dirs:      example-strict-lc/infer
+  default-language:    Haskell2010
+
 library example-strict-lc-impl
   exposed-modules:     Lambda.Term.Indef
+                     , Lambda.Type.Indef
                      , Lambda.Var.Indef
                      , Lambda.Abs.Debruijn.Indef
                      , Lambda.App.Indef
                      , Lambda.Internal
+                     , Lambda.Type.Context.Indef
   build-depends:       base >=4.9 && <4.11
+                     , containers
+                     , mtl
                      , lens
                      , unification
+                     , lambda-type-context-cvar
   hs-source-dirs:      example-strict-lc
   default-language:    Haskell2010
 
@@ -190,11 +221,15 @@ library
                      , unification
                      , lens
                      , example-strict-lc-eval
+                     , example-strict-lc-infer
                      , example-strict-lc-impl
                      , lambda-abs-sig
                      , lambda-abs-debruijn-sig
                      , lambda-app-sig
                      , lambda-term-sig
+                     , lambda-type-sig
+                     , lambda-type-context-cvar
+                     , mtl
   hs-source-dirs:      src
   default-language:    Haskell2010
 

@@ -1,17 +1,18 @@
-{-# language GADTs #-}
+{-# language ExistentialQuantification #-}
 module Typing where
 
-import Lambda.Term
-import Lambda.Type.Context.Indef
+import Data.Foldable (asum)
 
-data Rule f g m =
-  Rule
-    (Term f -> Maybe parts)
-    (Context g -> parts -> m (Type g))
+data InferenceRule tm ty m
+  = forall parts
+  . InferenceRule
+  { unInferenceRule
+    :: [InferenceRule tm ty m]
+    -> tm
+    -> Maybe (parts, parts -> m ty)
+  }
 
-infer
-  :: [Rule f g m]
-  -> Context g
-  -> Term f
-  -> m (Type g)
-infer rules ctxt tm = _
+infer :: [InferenceRule tm ty m] -> tm -> Maybe (m ty)
+infer rules tm =
+  asum $
+  fmap (\(InferenceRule r) -> fmap (snd <*> fst) $ r rules tm) rules

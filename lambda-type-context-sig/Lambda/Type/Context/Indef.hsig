@@ -1,9 +1,26 @@
-{-# language KindSignatures #-}
+{-# language ConstraintKinds, FlexibleContexts, KindSignatures #-}
 signature Lambda.Type.Context.Indef where
 
-import Lambda.Var.Indef
+import Control.Monad.Except
+import Data.Kind
 import Lambda.Type
+import Lambda.Type.CVar
 
-data Context (f :: * -> *)
+data Context (f :: * -> *) :: *
+data MonadContext (ctxt :: *) (m :: * -> *) :: Constraint
 
-insert :: Var -> TypeF f -> Context f
+data ContextError (f :: * -> *) :: *
+
+data InsertConstraints :: Constraint
+insertCtxt
+  :: (InsertConstraints, MonadContext (Context f) m)
+  => CVar
+  -> TypeF f
+  -> m a -> m a
+
+data LookupConstraints :: Constraint
+lookupCtxt
+  :: ( LookupConstraints, MonadContext (Context f) m
+     , MonadError (ContextError f) m)
+  => CVar
+  -> (TypeF f -> m a) -> m a

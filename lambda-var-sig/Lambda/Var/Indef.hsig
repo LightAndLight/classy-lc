@@ -11,3 +11,5 @@ instance Ord Var
 nextVar :: Var -> Var
 
 _Var :: Prism' (TermF f) Var
+
+toString :: Var -> String
