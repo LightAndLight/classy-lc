@@ -13,19 +13,19 @@ maintainer:          isaace71295@gmail.com
 -- category:            
 build-type:          Simple
 extra-source-files:  ChangeLog.md
-cabal-version:       >=1.10
+cabal-version:       >=2
 
 library lambda-term-sig
   signatures:          Lambda.Term.Indef
   exposed-modules:     Lambda.Term
-  build-depends:       base >=4.9 && <4.11
+  build-depends:       base >=4.9 && <5
                      , lens
   hs-source-dirs:      lambda-term-sig
   default-language:    Haskell2010
 
 library lambda-type-context-cvar
   exposed-modules:     Lambda.Type.CVar
-  build-depends:       base >=4.9 && <4.11
+  build-depends:       base >=4.9 && <5
                      , lens
                      , mtl
   hs-source-dirs:      lambda-type-context-cvar
@@ -33,7 +33,7 @@ library lambda-type-context-cvar
 
 library lambda-type-context-sig
   signatures:          Lambda.Type.Context.Indef
-  build-depends:       base >=4.9 && <4.11
+  build-depends:       base >=4.9 && <5
                      , lens
                      , lambda-type-sig
                      , mtl
@@ -44,7 +44,7 @@ library lambda-type-context-sig
 library lambda-var-sig
   signatures:          Lambda.Var.Indef
   exposed-modules:     Lambda.Var.Inference
-  build-depends:       base >=4.9 && <4.11
+  build-depends:       base >=4.9 && <5
                      , lambda-term-sig
                      , lambda-type-sig
                      , lambda-type-context-sig
@@ -57,18 +57,21 @@ library lambda-var-sig
 
 library lambda-abs-sig
   exposed-modules:     Lambda.Abs.Semantics
-  build-depends:       base >=4.9 && <4.11
+                     , Lambda.Abs.Inference
+  build-depends:       base >=4.9 && <5
                      , lambda-term-sig
+                     , lambda-type-sig
                      , lambda-var-sig
                      , lens
                      , semantics
+                     , typing
   hs-source-dirs:      lambda-abs-sig
   default-language:    Haskell2010
 
 library lambda-abs-named-sig
   signatures:          Lambda.Abs.Named.Indef
   exposed-modules:     Lambda.Abs.Named
-  build-depends:       base >=4.9 && <4.11
+  build-depends:       base >=4.9 && <5
                      , lambda-term-sig
                      , lambda-var-sig
                      , lens
@@ -79,7 +82,7 @@ library lambda-abs-named-sig
 library lambda-abs-debruijn-sig
   signatures:          Lambda.Abs.Debruijn.Indef
   exposed-modules:     Lambda.Abs.Debruijn
-  build-depends:       base >=4.9 && <4.11
+  build-depends:       base >=4.9 && <5
                      , lambda-term-sig
                      , lambda-var-sig
                      , lens
@@ -89,7 +92,7 @@ library lambda-abs-debruijn-sig
 
 library lambda-subst
   exposed-modules:     Lambda.Subst
-  build-depends:       base >=4.9 && <4.11
+  build-depends:       base >=4.9 && <5
                      , lambda-term-sig
                      , lambda-abs-sig
                      , lambda-abs-named-sig
@@ -101,7 +104,7 @@ library lambda-subst
 library lambda-app-sig
   signatures:          Lambda.App.Indef
   exposed-modules:     Lambda.App
-  build-depends:       base >=4.9 && <4.11
+  build-depends:       base >=4.9 && <5
                      , lambda-term-sig
                      , lambda-abs-sig
                      , lens
@@ -112,7 +115,7 @@ library lambda-app-sig
 library lambda-app-named
   exposed-modules:     Lambda.App.Named.Semantics.Strict
                      , Lambda.App.Named.Semantics.Lazy
-  build-depends:       base >=4.9 && <4.11
+  build-depends:       base >=4.9 && <5
                      , lambda-term-sig
                      , lambda-app-sig
                      , lambda-abs-named-sig
@@ -125,7 +128,7 @@ library lambda-app-named
 library lambda-app-debruijn
   exposed-modules:     Lambda.App.Debruijn.Semantics.Strict
                      , Lambda.App.Debruijn.Semantics.Lazy
-  build-depends:       base >=4.9 && <4.11
+  build-depends:       base >=4.9 && <5
                      , lambda-term-sig
                      , lambda-app-sig
                      , lambda-abs-debruijn-sig
@@ -138,7 +141,7 @@ library semantics
   exposed-modules:     Control.MaybeK
                      , Semantics.BigStep
                      , Semantics.Step
-  build-depends:       base >=4.9 && <4.11
+  build-depends:       base >=4.9 && <5
                      , lambda-term-sig
   hs-source-dirs:      semantics
   default-language:    Haskell2010
@@ -146,20 +149,20 @@ library semantics
 library lambda-type-sig
   signatures:          Lambda.Type.Indef
   exposed-modules:     Lambda.Type
-  build-depends:       base >=4.9 && <4.11
+  build-depends:       base >=4.9 && <5
                      , lens
   hs-source-dirs:      lambda-type-sig
   default-language:    Haskell2010
 
 library typing
   exposed-modules:     Typing
-  build-depends:       base >=4.9 && <4.11
+  build-depends:       base >=4.9 && <5
   hs-source-dirs:      typing
   default-language:    Haskell2010
 
 library example-strict-lc-eval
   exposed-modules:     Lambda.Eval
-  build-depends:       base >=4.9 && <4.11
+  build-depends:       base >=4.9 && <5
                      , lens
                      , lambda-term-sig
                      , lambda-app-sig
@@ -173,7 +176,7 @@ library example-strict-lc-eval
 
 library example-strict-lc-infer
   exposed-modules:     Lambda.Infer
-  build-depends:       base >=4.9 && <4.11
+  build-depends:       base >=4.9 && <5
                      , lens
                      , lambda-term-sig
                      , lambda-type-sig
@@ -192,7 +195,7 @@ library example-strict-lc-impl
                      , Lambda.App.Indef
                      , Lambda.Internal
                      , Lambda.Type.Context.Indef
-  build-depends:       base >=4.9 && <4.11
+  build-depends:       base >=4.9 && <5
                      , containers
                      , mtl
                      , lens
@@ -207,7 +210,7 @@ library unification
                      , Data.HFoldable
                      , Data.HTraversable
                      , Data.Unify
-  build-depends:       base >=4.9 && <4.11
+  build-depends:       base >=4.9 && <5
                      , lens
                      , equivalence
                      , mtl
@@ -217,7 +220,7 @@ library unification
 library
   reexported-modules:  Lambda.Eval
   exposed-modules:     Lib
-  build-depends:       base >=4.9 && <4.11
+  build-depends:       base >=4.9 && <5
                      , unification
                      , lens
                      , example-strict-lc-eval
@@ -236,6 +239,6 @@ library
 executable test
   main-is:             Main.hs
   hs-source-dirs:      test
-  build-depends:       base >=4.9 && <4.11
+  build-depends:       base >=4.9 && <5
                      , classy-lc
   default-language:    Haskell2010

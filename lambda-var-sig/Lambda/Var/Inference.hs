@@ -20,8 +20,8 @@ inferVar
   => InferenceRule (TermF f) (TypeF g) m
 inferVar =
   InferenceRule $ \_ tm -> do
-    v <- tm ^? _Var
-    Just (CVar $ toString v, inferTy)
+    MkVar a b  <- tm ^? _Var
+    Just (CVar a b, inferTy)
   where
     inferTy :: LookupConstraints => CVar -> m (TypeF g)
     inferTy v = lookupCtxt v pure

@@ -25,3 +25,16 @@ abstract1 v =
             then _Bound # bzero
             else _Var # v) .
     transform (over _Bound succ))
+
+instantiate1 :: Traversable f => TermF f -> TermF f -> TermF f
+instantiate1 x b =
+  case b ^? _AbsF of
+    Nothing -> b
+    Just body ->
+      rewrite
+        (\tm -> do
+            b <- tm ^? _Bound
+            Just $ if b == bzero
+              then x
+              else _Bound # pred b)
+        body

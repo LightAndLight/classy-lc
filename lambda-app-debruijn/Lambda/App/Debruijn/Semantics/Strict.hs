@@ -14,11 +14,4 @@ appBigStep steps =
     (f, x) <- liftMaybe (from ^? _App)
     body <- liftMaybe . preview _Abs =<< (steps f <|> just f)
     x' <- steps x <|> just x
-    just $
-      rewrite
-        (\tm -> do
-            b <- tm ^? _Bound
-            Just $ if b == bzero
-              then x'
-              else _Bound # pred b)
-        body
+    just $ instantiate1 x' body

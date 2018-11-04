@@ -1,4 +1,5 @@
 module Lambda.Type.CVar where
 
-newtype CVar = CVar { unCVar :: String }
+data CVar
+  = CVar String Int
   deriving (Eq, Ord, Show)
